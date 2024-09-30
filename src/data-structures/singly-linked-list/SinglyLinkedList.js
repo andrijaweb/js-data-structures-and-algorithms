@@ -73,6 +73,20 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  get(i) {
+    if (i < 0 || i >= this.length) return null;
+
+    let counter = 0;
+    let current = this.head;
+
+    while (counter !== i) {
+      counter++;
+      current = current.next;
+    }
+
+    return current;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -83,7 +97,7 @@ list.push("!");
 
 list.pop();
 list.shift();
-
 list.unshift("Unshifted val");
+console.log(list.get(2));
 
 console.log(list);

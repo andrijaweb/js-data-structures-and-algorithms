@@ -102,28 +102,35 @@ class SinglyLinkedList {
     if (i === this.length) return !!this.push(val);
     if (i === 0) return !!this.unshift(val);
 
-    const newNode = new Node(val);
+    let newNode = new Node(val);
     const previous = this.get(i - 1);
-    const temp = previous.next;
 
-    previous.next = newNode;
-    newNode.next = temp;
+    [previous.next, newNode] = [newNode, previous.next];
+
     this.length++;
 
     return true;
   }
+
+  remove(i) {
+    if (i < 0 || i >= this.length) return undefined;
+    if (i === this.length) return this.pop();
+    if (i === 0) return this.shift();
+
+    const prevNode = this.get(i - 1);
+    const removedNode = prevNode.next;
+    prevNode.next = removedNode.next;
+    this.length--;
+
+    return removedNode;
+  }
 }
 
 const list = new SinglyLinkedList();
-list.push("Hello");
-list.push("World");
-list.push("Test");
-list.push("!");
-
-list.pop();
-list.shift();
-list.unshift("Unshifted val");
-console.log(list.get(2));
-list.set(2, "Tessst");
+list.push(100);
+list.push(101);
+list.push(102);
+list.push(103);
+list.remove(0);
 
 console.log(list);

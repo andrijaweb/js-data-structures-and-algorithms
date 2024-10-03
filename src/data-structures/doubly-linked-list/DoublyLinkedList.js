@@ -115,6 +115,22 @@ class DoublyLinkedList {
 
     return false;
   }
+
+  insert(i, val) {
+    if (i < 0 || i >= this.length) return false;
+    if (i === 0) return !!this.unshift(val);
+    if (i === this.length) return !!this.push(val);
+    const prevNode = this.get(i - 1);
+    const newNode = new Node(val);
+
+    prevNode.next = newNode;
+    newNode.prev = prevNode;
+    newNode.next = prevNode.next;
+    prevNode.next.prev = newNode;
+
+    this.length++;
+    return true;
+  }
 }
 
 const list = new DoublyLinkedList();

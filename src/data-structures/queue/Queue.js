@@ -23,6 +23,17 @@ class Queue {
 
     return ++this.len;
   }
+
+  dequeue() {
+    if (!this.first) return null;
+
+    const removedNode = this.first;
+    if (this.first === this.last) this.last = null;
+    this.first = this.first.next;
+
+    this.len--;
+    return removedNode.val;
+  }
 }
 
 const queue = new Queue();

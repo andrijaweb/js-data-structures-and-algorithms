@@ -23,6 +23,17 @@ class Stack {
 
     return ++this.len;
   }
+
+  pop() {
+    if (!this.first) return null;
+    const curFirst = this.first;
+
+    if (this.len === 1) this.last = null;
+    else this.first = this.first.next;
+
+    this.len--;
+    return curFirst.val;
+  }
 }
 
 const stack = new Stack();

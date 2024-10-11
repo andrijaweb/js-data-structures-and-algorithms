@@ -87,3 +87,34 @@ class Node {
     this.priority = priority;
   }
 }
+
+class PriorityQueue {
+  constructor() {
+    this.values = [];
+  }
+
+  enqueue(val, priority) {
+    const newNode = new Node(val, priority);
+    this.values.push(newNode);
+    this.bubbleUp();
+  }
+
+  bubbleUp() {
+    let index = this.values.length - 1;
+    const el = this.values[index];
+
+    while (index > 0) {
+      const parentIndex = Math.floor((index - 1) / 2);
+      const parentEl = this.values[parentIndex];
+
+      if (el.priority <= parentEl.priority) break;
+      this.values[parentIndex] = el;
+      this.values[index] = parentEl;
+
+      index = parentIndex;
+    }
+  }
+}
+
+const hospital = new PriorityQueue();
+console.log(hospital);
